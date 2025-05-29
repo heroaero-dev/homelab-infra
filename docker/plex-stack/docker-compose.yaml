@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    ports:
+      - "32400:32400"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - VERSION=docker
+    networks:
+      - nginx-plex
+      
+    volumes:
+      - ./config:/config
+      - ./media/TV:/tv
+      - ./media/Movies:/movies
+    restart: unless-stopped
+  tailscale:
+    image: tailscale/tailscale
+    container_name: tailscale
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    networks:
+      - nginx-plex
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_EXTRA_ARGS=--advertise-exit-node --accept-routes
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+      - tailscale-var-lib:/var/lib/tailscale
+    command: >
+      sh -c "
+        tailscaled --tun=userspace-networking --state=mem: &
+        sleep 3 &&
+        tailscale up --authkey=${TS_AUTHKEY} &&
+        sleep infinity
+      "
+    restart: unless-stopped
+volumes:
+  tailscale-var-lib:
+networks:
+  nginx-plex:
+    driver: bridge

@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yaml
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: plex
+  name: plex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: plex
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yaml
+        kompose.version: 1.31.2 (a92241f79)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/plex-stack-nginx-plex: "true"
+        io.kompose.service: plex
+    spec:
+      containers:
+        - env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: Etc/UTC
+            - name: VERSION
+              value: docker
+          image: lscr.io/linuxserver/plex:latest
+          name: plex
+          ports:
+            - containerPort: 32400
+              hostPort: 32400
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - mountPath: /config
+              name: plex-claim0
+            - mountPath: /tv
+              name: plex-claim1
+            - mountPath: /movies
+              name: plex-claim2
+      restartPolicy: Always
+      volumes:
+        - name: plex-claim0
+          persistentVolumeClaim:
+            claimName: plex-claim0
+        - name: plex-claim1
+          persistentVolumeClaim:
+            claimName: plex-claim1
+        - name: plex-claim2
+          persistentVolumeClaim:
+            claimName: plex-claim2
+status: {}

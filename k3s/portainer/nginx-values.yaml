@@ -1,0 +1,12 @@
+controller:
+  ingressClassResource:
+    name: nginx-main
+  ingressClass: nginx-main
+  name: nginx-main
+  scope:
+    enabled: false
+  minReadySeconds: 1
+  progressDeadlineSeconds: 60
+rbac:
+  create: true
+fullnameOverride: nginx-main

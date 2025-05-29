@@ -1,0 +1,13 @@
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  className: nginx-main
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+  hosts:
+    - host: portainer.heroaero.dev
+      paths:
+        - path: /
+          pathType: Prefix
