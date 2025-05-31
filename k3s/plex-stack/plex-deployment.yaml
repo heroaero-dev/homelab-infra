@@ -1,6 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: plex
+  namespace: test-dev
   annotations:
     kompose.cmd: kompose convert -f docker-compose.yaml
     kompose.version: 1.31.2 (a92241f79)
@@ -25,6 +27,7 @@ spec:
         io.kompose.network/plex-stack-nginx-plex: "true"
         io.kompose.service: plex
     spec:
+      serviceAccountName: app-sa
       containers:
         - env:
             - name: PGID
@@ -35,6 +38,8 @@ spec:
               value: Etc/UTC
             - name: VERSION
               value: docker
+            - name: PLEX_CLAIM
+              value: ${CLAIM_TOKEN}
           image: lscr.io/linuxserver/plex:latest
           name: plex
           ports:
