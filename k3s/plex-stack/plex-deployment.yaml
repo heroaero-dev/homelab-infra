@@ -40,7 +40,7 @@ spec:
               value: docker
             - name: PLEX_CLAIM
               value: ${CLAIM_TOKEN}
-          image: lscr.io/linuxserver/plex:latest
+          image: ghcr.io/linuxserver/plex:latest
           name: plex
           ports:
             - containerPort: 32400
