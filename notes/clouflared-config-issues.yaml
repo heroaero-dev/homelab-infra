@@ -1,0 +1,9 @@
+## my domains <homepage.heroaero.dev> were throwing 404's 
+# ROOT CAUSES
+# cloudflared was reading /etc/cloudflared/config.yml when i was editing ~/.cloudflared/config.yaml the whole time
+# moved config.yaml with commands:
+# $ sudo cp ~/.cloudflared/config.yaml /etc/cloudflared/config.yml
+# $ sudo systemctl restart cloudflared
+# podman-compose down
+# podman-compose up -d --force-recreate
+
