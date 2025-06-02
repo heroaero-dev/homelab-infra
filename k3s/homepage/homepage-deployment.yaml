@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: homepage
+  name: homepage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: homepage
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: homepage
+    spec:
+      containers:
+      - env:
+        - name: HOMEPAGE_ALLOWED_HOSTS
+          value: localhost,127.0.0.1,100.69.27.29:30900,heroaero.dev,www.heroaero.dev
+        - name: PGID
+          value: "1000"
+        - name: PUID
+          value: "1000"
+        image: ghcr.io/gethomepage/homepage:latest
+        imagePullPolicy: ""
+        name: homepage
+        ports:
+        - containerPort: 3000
+        resources: {}
+        volumeMounts:
+        - mountPath: /app/config
+          name: homepage-claim0
+        - mountPath: /var/run/docker.sock
+          name: homepage-claim1
+          readOnly: true
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: homepage-claim0
+        persistentVolumeClaim:
+          claimName: homepage-claim0
+      - name: homepage-claim1
+        persistentVolumeClaim:
+          claimName: homepage-claim1
+          readOnly: true
+status: {}
