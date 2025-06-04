@@ -46,7 +46,13 @@ spec:
             - containerPort: 32400
               hostPort: 32400
               protocol: TCP
-          resources: {}
+          resources: 
+            requests:
+              memory: "521Mi"
+              cpu: "500m"
+            limits:
+              memory: 1Gi
+              cpu: 1000m
           volumeMounts:
             - mountPath: /config
               name: plex-claim0
