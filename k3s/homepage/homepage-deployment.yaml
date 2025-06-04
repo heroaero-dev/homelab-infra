@@ -8,8 +8,9 @@ metadata:
   labels:
     io.kompose.service: homepage
   name: homepage
+  namespace: test-dev
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       io.kompose.service: homepage
@@ -24,6 +25,7 @@ spec:
       labels:
         io.kompose.service: homepage
     spec:
+      serviceAccountName: app-sa
       containers:
       - env:
         - name: HOMEPAGE_ALLOWED_HOSTS
