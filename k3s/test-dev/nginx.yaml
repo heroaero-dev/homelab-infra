@@ -1,13 +1,26 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-test
+  name: backend
   namespace: test-dev
   labels:
-    app: my-test-app
-    type: front-end
+    app: backend
+    tier: god
 spec:
   containers:
-    - name: nginx-test
-      image: nginx:latest
+  - name: app
+    image: nginx:latest
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+  namespace: test-dev
+  labels:
+    app: frontend
+    tier: godly
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
 
