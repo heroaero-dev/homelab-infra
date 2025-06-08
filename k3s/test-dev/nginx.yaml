@@ -1,26 +1,40 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment 
 metadata:
-  name: backend
-  namespace: test-dev
+  name: myapp-deployment 
+  namespace: test-dev 
   labels:
-    app: backend
-    tier: god
+    tier: deployment 
+    app: my-deploy 
 spec:
-  containers:
-  - name: app
-    image: nginx:latest
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pod 
+  template:
+    metadata:
+      name: my-pod
+      labels:
+        tier: pod
+        app: pod 
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
 ---
 apiVersion: v1
-kind: Pod
+kind: Service 
 metadata:
-  name: frontend
-  namespace: test-dev
+  name: nginx-deploy 
+  namespace: test-dev 
   labels:
-    app: frontend
-    tier: godly
+    tier: service 
+    app: app-service 
 spec:
-  containers:
-  - name: nginx
-    image: nginx:latest
-
+  selector:
+    app: pod  
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP

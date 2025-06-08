@@ -1,13 +1,25 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: ReplicaSet
 metadata:
-  name: adminer-test
-  namespace: test-dev
+  name: adminer-rs
+  namespace: test-dev 
   labels:
-    app: my-test-app
-    type: back-end
+    name: adminer-replicas
+    env: data
 spec:
-  containers:
-    - name: adminer
-      image: adminer:latest
-
+  selector:
+    matchLabels:
+      env: data 
+  replicas: 5
+  template:
+    metadata:
+      name: adminer-pod
+      labels:
+        tier: admin 
+        env: data 
+    spec:
+      containers:
+        - name: adminer-pod
+          image: adminer:latest
+          ports:
+            - containerPort: 8080

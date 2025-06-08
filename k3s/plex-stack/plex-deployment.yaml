@@ -39,7 +39,10 @@ spec:
             - name: VERSION
               value: docker
             - name: PLEX_CLAIM
-              value: ${CLAIM_TOKEN}
+              valueFrom:
+                secretKeyRef:
+                  name: plex-secret
+                  key: PLEX_CLAIM
           image: ghcr.io/linuxserver/plex:latest
           name: plex
           ports:

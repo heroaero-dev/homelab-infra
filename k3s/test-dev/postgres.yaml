@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: postgres-rs 
+  namespace: test-dev 
+  labels:
+    tier: test 
+    env: data
+spec:
+  selector:
+    matchLabels:
+      env: data 
+  replicas: 5
+  template:
+    metadata:
+      name: postgres-pod 
+      labels:
+        env: data 
+        tier: test 
+    spec:
+      containers:
+        - name: postgres 
+          image: postgres:latest 
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-pw
+                  key: POSTGRES_PASSWORD 
+            
