@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service 
+metadata:
+  name: pgadmin-svc
+  namespace: test-dev 
+spec:
+  type: ClusterIP
+  selector:
+    env: admin
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

@@ -5,17 +5,17 @@ metadata:
   namespace: test-dev 
   labels:
     tier: test 
-    env: data
+    env: postgres-rs
 spec:
   selector:
     matchLabels:
-      env: data 
+      env: postgres-rs 
   replicas: 5
   template:
     metadata:
       name: postgres-pod 
       labels:
-        env: data 
+        env: postgres-rs 
         tier: test 
     spec:
       containers:

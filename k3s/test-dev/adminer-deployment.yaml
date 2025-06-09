@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: adminer-deployment 
+  namespace: test-dev 
+  labels:
+    app: admin 
+    env: admin 
+    tier: admin
+spec:
+  replicas: 4 
+  selector:
+    matchLabels:
+      env: admin
+  template:
+    metadata:
+      name: adminer-pod 
+      labels:
+        env: admin
+    spec:
+      containers:
+        - name: adminer 
+          image: adminer:latest
+          ports:
+            - containerPort: 8080

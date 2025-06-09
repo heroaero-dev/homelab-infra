@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: pgadmin-deployment 
+  namespace: test-dev 
+  labels:
+    tier: admin
+    app: admin
+    env: admin
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: admin
+  template:
+    metadata:
+      name: pgadmin-pod 
+      labels:
+        env: admin
+    spec:
+      containers:
+        - name: pgadmin 
+          image: dpage/pgadmin4
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              value: user@domain.com 
+            - name: PGADMIN_DEFAULT_PASSWORD
+              value: SuperSecret
+          ports:
+            - containerPort: 80

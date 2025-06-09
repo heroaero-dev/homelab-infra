@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: wordpress-rs
+  namespace: test-dev 
+  labels:
+    tier: test
+    env: app 
+spec:
+  selector:
+    matchLabels:
+      env: app 
+  replicas: 2
+  template:
+    metadata:
+      name: wordpress-pod 
+      labels:
+        env: app 
+    spec:
+      containers:
+        - name: wordpress 
+          image: wordpress
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: mariadb 
+            - name: WORDPRESS_DB_USER
+              value: aero 
+            - name: WORDPRESS_DB_PASSWORD
+              value: aero 
+            - name: WORDPRESS_DB_NAME
+              value: aero
+          ports:
+            - containerPort: 80

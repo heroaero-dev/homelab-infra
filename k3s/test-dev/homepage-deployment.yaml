@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: homepage-deployment 
+  namespace: test-dev 
+  labels:
+    tier: godly
+    env: dashboard
+    app: homepage 
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      tier: godly 
+  template:
+    metadata:
+      name: homepage-pod 
+      labels:
+        tier: godly
+    spec:
+      serviceAccountName: app-sa
+      containers:
+      - env:
+        - name: HOMEPAGE_ALLOWED_HOSTS
+          value: localhost,127.0.0.1,100.69.27.29:30900,heroaero.dev,www.heroaero.dev
+        - name: PGID
+          value: "1000"
+        - name: PUID
+          value: "1000"
+        image: ghcr.io/gethomepage/homepage:latest
+        imagePullPolicy: ""
+        name: homepage
+        ports:
+        - containerPort: 3000
+        resources: {}
+        volumeMounts:
+        - mountPath: /app/config
+          name: homepage-claim0
+        - mountPath: /var/run/docker.sock
+          name: homepage-claim1
+          readOnly: true
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: homepage-claim0
+        persistentVolumeClaim:
+          claimName: homepage-claim0
+      - name: homepage-claim1
+        persistentVolumeClaim:
+          claimName: homepage-claim1
+          readOnly: true
+ 
+
