@@ -22,14 +22,21 @@ spec:
       containers:
       - env:
         - name: HOMEPAGE_ALLOWED_HOSTS
-          value: localhost,127.0.0.1,100.69.27.29:30900,heroaero.dev,www.heroaero.dev
+          value: heroaero.dev,www.heroaero.dev
         - name: PGID
           value: "1000"
         - name: PUID
           value: "1000"
-        image: ghcr.io/gethomepage/homepage:latest
+        image: ghcr.io/gethomepage/homepage:v1.3.2
         imagePullPolicy: ""
         name: homepage
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
         ports:
         - containerPort: 3000
         resources: {}

@@ -18,9 +18,10 @@ spec:
       labels:
         env: admin
     spec:
+      serviceAccountName: app-sa
       containers:
         - name: pgadmin 
-          image: dpage/pgadmin4
+          image: dpage/pgadmin4:9.4 
           env:
             - name: PGADMIN_DEFAULT_EMAIL
               value: user@domain.com 
