@@ -1,7 +1,7 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment 
 metadata:
-  name: wordpress-rs
+  name: wordpress-deploy 
   namespace: test-dev 
   labels:
     tier: test
@@ -9,25 +9,29 @@ metadata:
 spec:
   selector:
     matchLabels:
-      env: app 
+      tier: test
   replicas: 2
   template:
     metadata:
       name: wordpress-pod 
       labels:
-        env: app 
+        tier: test
     spec:
       containers:
         - name: wordpress 
           image: wordpress
           env:
             - name: WORDPRESS_DB_HOST
-              value: mariadb 
+              value: mariadb-svc
             - name: WORDPRESS_DB_USER
               value: aero 
             - name: WORDPRESS_DB_PASSWORD
               value: aero 
             - name: WORDPRESS_DB_NAME
               value: aero
+            - name: WORDPRESS_SITE_URL
+              value: https://pw.heroaero.dev
+            - name: WORDPRESS_HOME
+              value: https://pw.heroaero.dev 
           ports:
             - containerPort: 80

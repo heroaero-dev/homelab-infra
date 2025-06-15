@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: portainer-deploy 
+  namespace: test-dev
+  labels:
+    env: port 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      env: port
+  template:
+    metadata:
+      labels: 
+        env: port 
+    spec:
+      containers:
+        - name: portainer-pod 
+          image: portainer/portainer-ce:latest
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - name: portainer-storage
+              mountPath: /data
+      volumes:
+        - name: portainer-storage
+          persistentVolumeClaim:
+            claimName: portainer-data

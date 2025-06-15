@@ -8,7 +8,7 @@ metadata:
     env: mariadb-deployment
     tier: data
 spec:
-  replicas: 4 
+  replicas: 1
   selector:
     matchLabels:
       env: mariadb-deployment

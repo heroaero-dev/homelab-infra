@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcraft-deploy
+  namespace: test-dev 
+  labels:
+    env: game
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      env: game
+  template:
+    metadata:
+      name: mcraft-rs 
+      labels:
+        env: game
+    spec:
+      containers:
+        - name: mcraft-pod 
+          image: itzg/minecraft-server
+          ports:
+            - containerPort: 25565
+          env:
+            - name: EULA
+              value: "TRUE"
+            - name: MEMORY
+              value: "2G"
+          volumeMounts:
+            - name: minecraft-data
+              mountPath: /data 
+      volumes:
+        - name: minecraft-data
+          persistentVolumeClaim:
+            claimName: mcraft-pvc 
