@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nginx
+    method: fromcode
+  name: nginx-yaml
+spec:
+  containers:
+  - image: nginx
+    name: nginx
