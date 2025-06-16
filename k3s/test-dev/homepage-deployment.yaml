@@ -4,19 +4,17 @@ metadata:
   name: homepage-deployment 
   namespace: test-dev 
   labels:
-    tier: godly
-    env: dashboard
     app: homepage 
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
-      tier: godly 
+      app: homepage 
   template:
     metadata:
       name: homepage-pod 
       labels:
-        tier: godly
+        app: homepage
     spec:
       serviceAccountName: app-sa
       containers:

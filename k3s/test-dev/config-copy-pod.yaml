@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-copy-pod
+spec:
+  containers:
+  - name: copier
+    image: busybox
+    command: ["/bin/sh", "-c", "sleep 3600"]
+    volumeMounts:
+    - name: config-vol
+      mountPath: /config
+    - name: data-vol
+      mountPath: /data
+  volumes:
+  - name: config-vol
+    configMap:
+      name: homepage-config
+  - name: data-vol
+    persistentVolumeClaim:
+      claimName: homepage-claim1
+  restartPolicy: Never
+

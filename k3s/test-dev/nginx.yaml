@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
+  namespace: test-dev 
   labels:
     run: nginx
     method: fromcode

@@ -4,8 +4,9 @@ metadata:
   name: postgres-svc
   namespace: test-dev 
 spec:
+  type: ClusterIP
   selector:
-    env: postgres-rs 
+    app: postgres-deploy 
   ports:
     - port: 5432
       targetPort: 5432

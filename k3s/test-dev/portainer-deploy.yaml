@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: portainer
+  name: portainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: portainer
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: portainer
+    spec:
+      nodeName: toaster
+      containers:
+      - image: portainer/portainer
+        name: portainer
+        ports:
+          - containerPort: 9000

@@ -6,7 +6,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    tier: godly
+    app: homepage
   ports:
     - targetPort: 3000 
       port: 80

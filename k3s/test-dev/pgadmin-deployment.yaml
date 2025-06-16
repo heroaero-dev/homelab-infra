@@ -8,7 +8,7 @@ metadata:
     app: admin
     env: pgadmin
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       env: pgadmin
@@ -19,6 +19,7 @@ spec:
         env: pgadmin
     spec:
       serviceAccountName: app-sa
+      nodeName: toaster
       containers:
         - name: pgadmin 
           image: dpage/pgadmin4:9.4 

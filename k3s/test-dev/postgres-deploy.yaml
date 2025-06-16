@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres-deploy
+  name: postgres-deploy
+  namespace: test-dev
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: postgres-deploy
+  template:
+    metadata:
+      labels:
+        app: postgres-deploy
+    spec:
+      nodeName: toaster
+      serviceAccountName: app-sa
+      containers:
+      - image: postgres
+        name: postgres
+        env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-pw
+                key: POSTGRES_PASSWORD

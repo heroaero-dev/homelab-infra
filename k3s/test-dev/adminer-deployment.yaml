@@ -8,7 +8,7 @@ metadata:
     env: admin 
     tier: admin
 spec:
-  replicas: 4 
+  replicas: 1
   selector:
     matchLabels:
       env: admin
