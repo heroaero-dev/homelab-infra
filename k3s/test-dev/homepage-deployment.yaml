@@ -17,6 +17,7 @@ spec:
         app: homepage
     spec:
       serviceAccountName: app-sa
+      nodeName: toaster
       containers:
       - env:
         - name: HOMEPAGE_ALLOWED_HOSTS
