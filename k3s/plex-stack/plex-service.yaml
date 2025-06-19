@@ -7,7 +7,7 @@ metadata:
     app: plex
 spec:
   selector:
-    io.kompose.service: plex
+    env: plex
   ports:
     - name: http
       port: 32400

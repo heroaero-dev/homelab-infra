@@ -3,29 +3,20 @@ kind: Deployment
 metadata:
   name: plex
   namespace: test-dev
-  annotations:
-    kompose.cmd: kompose convert -f docker-compose.yaml
-    kompose.version: 1.31.2 (a92241f79)
-  creationTimestamp: null
   labels:
-    io.kompose.service: plex
+    env: plex
   name: plex
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: plex
+      env: plex
   strategy:
     type: Recreate
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert -f docker-compose.yaml
-        kompose.version: 1.31.2 (a92241f79)
-      creationTimestamp: null
       labels:
-        io.kompose.network/plex-stack-nginx-plex: "true"
-        io.kompose.service: plex
+        env: plex
     spec:
       serviceAccountName: app-sa
       containers:
@@ -74,4 +65,3 @@ spec:
         - name: plex-claim2
           persistentVolumeClaim:
             claimName: plex-claim2
-status: {}

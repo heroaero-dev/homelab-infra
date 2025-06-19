@@ -1,11 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.36.0 (ae2a39403)
   labels:
-    io.kompose.service: warden
+    app: warden
   name: warden
 spec:
   type: NodePort
@@ -15,4 +12,4 @@ spec:
       targetPort: 80
       nodePort: 31900
   selector:
-    io.kompose.service: warden
+    app: warden
