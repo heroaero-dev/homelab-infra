@@ -15,7 +15,9 @@ spec:
       labels:
         app: redhat
     spec:
+      serviceAccountName: app-sa
       containers:
         - name: redhat
-          image: quay.io/centos/centos:stream8
-
+          image: redhat/ubi8
+          command: ["/bin/bash", "-c"]
+          args: ["sleep infinity"]

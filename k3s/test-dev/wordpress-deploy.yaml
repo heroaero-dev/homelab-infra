@@ -17,18 +17,31 @@ spec:
       labels:
         tier: test
     spec:
+      serviceAccountName: app-sa
       containers:
         - name: wordpress 
           image: wordpress
           env:
             - name: WORDPRESS_DB_HOST
-              value: mariadb-svc
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress 
+                  key:  WORDPRESS_DB_HOST
             - name: WORDPRESS_DB_USER
-              value: aero 
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress
+                  key: WORDPRESS_DB_USER
             - name: WORDPRESS_DB_PASSWORD
-              value: aero 
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress
+                  key: WORDPRESS_DB_PASSWORD
             - name: WORDPRESS_DB_NAME
-              value: aero
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress
+                  key: WORDPRESS_DB_NAME
             - name: WORDPRESS_SITE_URL
               value: https://pw.heroaero.dev
             - name: WORDPRESS_HOME

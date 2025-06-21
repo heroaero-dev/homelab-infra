@@ -12,6 +12,11 @@ spec:
   selector:
     matchLabels:
       env: pgadmin
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       name: pgadmin-pod 
@@ -22,7 +27,7 @@ spec:
       nodeName: toaster
       containers:
         - name: pgadmin 
-          image: dpage/pgadmin4:9.4 
+          image: dpage/pgadmin4:9.4.0 
           env:
             - name: PGADMIN_DEFAULT_EMAIL
               valueFrom:

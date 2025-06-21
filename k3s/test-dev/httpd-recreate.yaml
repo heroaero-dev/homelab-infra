@@ -16,12 +16,7 @@ spec:
         app: httpd
     spec:
       containers:
-        - image: httpd:bookworm
+        - image: httpd:latest
           name: httpd
-          command: ["/bin/bash", "-c"] # over ride the default command 
-          args: ["sleep 5; exit 1"] # sleep for 30 seconds then exit with an error
   strategy:
-    type: RollingUpdate
-    rollingUpdate: 
-      maxUnavailable: 1
-      maxSurge: 1
+    type: Recreate

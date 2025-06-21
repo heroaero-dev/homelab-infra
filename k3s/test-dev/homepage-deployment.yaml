@@ -38,22 +38,6 @@ spec:
             cpu: "250m"
         ports:
         - containerPort: 3000
-        resources: {}
-        volumeMounts:
-        - mountPath: /app/config
-          name: homepage-claim0
-        - mountPath: /var/run/docker.sock
-          name: homepage-claim1
-          readOnly: true
       restartPolicy: Always
-      serviceAccountName: ""
-      volumes:
-      - name: homepage-claim0
-        persistentVolumeClaim:
-          claimName: homepage-claim0
-      - name: homepage-claim1
-        persistentVolumeClaim:
-          claimName: homepage-claim1
-          readOnly: true
  
 
