@@ -31,3 +31,4 @@ k3s/plex-stack/config/
 
 .env
 **/.env
+.env.gpg
