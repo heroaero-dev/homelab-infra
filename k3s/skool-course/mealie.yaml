@@ -6,7 +6,7 @@ metadata:
   name: mealie
   namespace: mealie
 spec:
-  replicas: 1
+  replicas: 1 
   selector:
     matchLabels:
       app: mealie
@@ -16,7 +16,15 @@ spec:
         app: mealie
     spec:
       containers:
-      - image: ghcr.io/mealie-recipes/mealie:v1.2.0
+      - image: ghcr.io/mealie-recipes/mealie:v2.8.0
         name: mealie
         ports:
-            - containerPort: 9000
+          - containerPort: 9000
+        volumeMounts: 
+          - mountPath: /cache
+            name: cache-volume 
+      volumes:
+        - name: cache-volume
+          emptyDir:
+            sizeLimit: 500Mi 
+

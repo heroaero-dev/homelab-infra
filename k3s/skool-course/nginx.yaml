@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  namespace: test-dev 
+  namespace: mealie
   labels:
     run: nginx
     method: fromcode
