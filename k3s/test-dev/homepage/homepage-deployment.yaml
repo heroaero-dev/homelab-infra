@@ -17,7 +17,6 @@ spec:
         app: homepage
     spec:
       serviceAccountName: app-sa
-      nodeName: toaster
       containers:
       - env:
         - name: HOMEPAGE_ALLOWED_HOSTS
@@ -38,6 +37,18 @@ spec:
             cpu: "250m"
         ports:
         - containerPort: 3000
+        volumeMounts:
+          - mountPath: /app/config 
+            name: homepage-storage0
+          - mountPath: /var/run/docker.sock
+            name: homepage-storage1
+            readOnly: true
       restartPolicy: Always
- 
-
+      volumes:
+        - name: homepage-storage0
+          persistentVolumeClaim:
+            claimName: homepage-storage0
+        - name: homepage-storage1
+          persistentVolumeClaim:
+            claimName: homepage-storage1
+            readOnly: true

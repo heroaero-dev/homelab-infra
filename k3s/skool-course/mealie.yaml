@@ -21,10 +21,10 @@ spec:
         ports:
           - containerPort: 9000
         volumeMounts: 
-          - mountPath: /cache
-            name: cache-volume 
+          - mountPath: /app/data
+            name: mealie-data
       volumes:
-        - name: cache-volume
-          emptyDir:
-            sizeLimit: 500Mi 
+        - name: mealie-data
+          persistentVolumeClaim:
+            claimName: mealie-data
 
