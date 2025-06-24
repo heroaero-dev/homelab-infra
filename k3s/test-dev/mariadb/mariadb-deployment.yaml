@@ -45,3 +45,10 @@ spec:
                   key: MYSQL_PASSWORD
           ports:
             - containerPort: 3306
+          volumeMounts:
+            - mountPath: /scratch
+              name: scratch-volume 
+      volumes:
+        - name: scratch-volume
+          emptyDir:
+            sizeLimit: 500Mi

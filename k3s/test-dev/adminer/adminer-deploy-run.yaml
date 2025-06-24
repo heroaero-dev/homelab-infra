@@ -22,5 +22,10 @@ spec:
       containers:
       - image: adminer:latest
         name: adminer
-        resources: {}
-status: {}
+        volumeMounts:
+            - mountPath: /admin-ephemeral
+              name: ephemeral-cache
+      volumes:
+        - name: ephemeral-cache
+          emptyDir:
+            sizeLimit: 500Mi

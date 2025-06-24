@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment 
 metadata:
-  name: pgadmin-deployment 
+  name: pgadmin
   namespace: test-dev 
   labels:
     tier: admin
@@ -24,7 +24,6 @@ spec:
         env: pgadmin
     spec:
       serviceAccountName: app-sa
-      nodeName: toaster
       containers:
         - name: pgadmin 
           image: dpage/pgadmin4:9.4.0 
@@ -41,3 +40,11 @@ spec:
                   key: PGADMIN_DEFAULT_PASSWORD
           ports:
             - containerPort: 80
+          volumeMounts:
+            - mountPath: /var/lib/pgadmin
+              name: pgadmin-claim
+      volumes:
+        - name: pgadmin-claim
+          persistentVolumeClaim:
+            claimName: pgadmin-claim
+

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: postgres-deploy
-  name: postgres-deploy
+  name: postgres
   namespace: test-dev
 spec:
   replicas: 3
@@ -15,14 +15,21 @@ spec:
       labels:
         app: postgres-deploy
     spec:
-      nodeName: toaster
       serviceAccountName: app-sa
       containers:
-      - image: postgres
-        name: postgres
-        env:
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgres-pw
-                key: POSTGRES_PASSWORD
+        - image: postgres
+          name: postgres
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-pw
+                  key: POSTGRES_PASSWORD
+          volumeMounts:
+            - mountPath: /var/lib/postgresql
+              name: postgres-storage
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-claim
+
