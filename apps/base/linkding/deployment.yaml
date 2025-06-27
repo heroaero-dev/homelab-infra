@@ -23,5 +23,5 @@ spec:
               name: linkding-volume 
       volumes:
         - name: linkding-volume
-          persistedVolumeClaim:
+          persistentVolumeClaim:
             claimName: linkding-volume
