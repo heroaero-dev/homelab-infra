@@ -19,11 +19,11 @@ spec:
           env:
             - name: PGADMIN_DEFAULT_EMAIL
               valueFrom:
-                secretRefKey:
+                secretKeyRef:
                   name: kube-secret 
                   key: PGADMIN_DEFAULT_EMAIL
             - name: PGADMIN_DEFAULT_PASSWORD
               valueFrom:
-                secretRefKey:
+                secretKeyRef:
                   name: kube-secret
                   key: PGADMIN_DEFAULT_PASSWORD
