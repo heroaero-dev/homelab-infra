@@ -1,8 +1,0 @@
-apiVersion: v1
-data:
-  ADMIN_TOKEN: test
-kind: ConfigMap
-metadata:
-  labels:
-    io.kompose.service: warden-env
-  name: env

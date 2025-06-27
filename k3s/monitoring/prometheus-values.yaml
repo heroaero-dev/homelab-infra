@@ -1,4 +1,0 @@
-prometheus:
-  prometheusSpec:
-    maximumStartupDurationSeconds: 300
-
