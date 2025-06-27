@@ -4,7 +4,7 @@ metadata:
   name: linkding
   namespace: linkding
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: linkding
@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: linkding
-          image: sissbrueker/linkding:latest
+          image: sissbruecker/linkding:1.31.0
           ports:
             - containerPort: 9090
