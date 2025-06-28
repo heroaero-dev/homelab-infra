@@ -37,7 +37,7 @@ spec:
             - --metrics
             - 0.0.0.0:2000
             - --config 
-            - /etc/cloudflared
+            - /etc/cloudflared/config.yaml
             - run
           livenessProbe:
             httpGet: 
