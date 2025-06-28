@@ -69,5 +69,5 @@ data:
       - hostname: link.heroaero.dev 
         service: http://linkding:9090
       - hostname: heroaero.dev 
-        service: http://homepage-svc:80
+        service: http://homepage-svc
       - service: http_status:404
