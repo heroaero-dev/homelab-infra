@@ -4,7 +4,7 @@ metadata:
   name: cloudflared
   namespace: cloudflared
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: cloudflared
@@ -36,6 +36,8 @@ spec:
             - debug
             - --metrics
             - 0.0.0.0:2000
+            - --config 
+            - /etc/cloudflared
             - run
           livenessProbe:
             httpGet: 
@@ -46,3 +48,25 @@ spec:
             failureThreshold: 1
             initialDelaySeconds: 10
             periodSeconds: 10
+          volumeMounts:
+            - name: config 
+              mountPath: /etc/cloudflared
+              readOnly: true 
+      volumes:
+        - name: config
+          configMap:
+            name: cloudflared-config 
+
+  ---
+
+  apiVersion: v1
+  kind: ConfigMap 
+  metadata:
+    name: cloudflared-config
+    namespace: cloudflared
+  data:
+    config.yaml: |
+      ingress:
+        - hostname: link.heroaero.dev 
+          service: http://10.43.85.255:9090
+        - service: http_status:404
