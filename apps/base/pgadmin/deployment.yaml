@@ -13,9 +13,15 @@ spec:
       labels:
         env: pgadmin
     spec:
+      securityContext:
+        fsGroup: 5050
+        runAsUser: 5050
+        runAsGroup: 5050
       containers:
         - name: pgadmin
           image: dpage/pgadmin4:9.4 
+          securityContext:
+            allowPrivilegeEscalation: false
           env:
             - name: PGADMIN_DEFAULT_EMAIL
               valueFrom:
