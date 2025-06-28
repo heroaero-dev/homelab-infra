@@ -67,5 +67,5 @@ data:
   config.yaml: |
     ingress:
       - hostname: link.heroaero.dev 
-        service: http://10.43.85.255:9090
+        service: http://linkding:9090
       - service: http_status:404
