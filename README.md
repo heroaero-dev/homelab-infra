@@ -18,7 +18,6 @@ I started with **Docker Swarm**, but after running into its limitations, I trans
 
 ## 📦 Current Setup
 
-- **Docker**: For containerizing all services
 - **K3s**: Lightweight Kubernetes for managing multi-node infrastructure
 - **Thinkpad E14**: My mobile workstation for testing, live debugging, and on-the-go infrastructure adjustments.
 - **Vaultwarden, Plex, Adminer, and more**: Deployed as part of my stacks
