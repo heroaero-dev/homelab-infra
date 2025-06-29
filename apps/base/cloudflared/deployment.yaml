@@ -76,4 +76,6 @@ data:
         service: http://pgadmin.test-dev.svc.cluster.local
       - hostname: graf.heroaero.dev
         service: http://prometheus-stack-grafana.monitoring.svc.cluster.local
+      - hostname: longhorn.heroaero.dev
+        service: http://longhorn-frontend.longhorn-system.svc.cluster.local
       - service: http_status:404
