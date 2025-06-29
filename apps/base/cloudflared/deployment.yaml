@@ -23,12 +23,11 @@ spec:
       containers:
         - name: cloudflared
           image: cloudflare/cloudflared:latest
-          env:
-            - name: TUNNEL_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: kube-secret 
-                  key: TUNNEL_TOKEN
+          envFrom:
+            - configMapRef:
+              name: cloudflared-config
+            - secretRef:
+                name: kube-secret 
           command:
             # configures tunnel run paramaters
             - cloudflared
@@ -50,14 +49,6 @@ spec:
             failureThreshold: 1
             initialDelaySeconds: 10
             periodSeconds: 10
-          volumeMounts:
-            - name: config 
-              mountPath: /etc/cloudflared/config 
-              readOnly: true 
-      volumes:
-        - name: config
-          configMap:
-            name: cloudflared-config 
 
 --- 
 apiVersion: v1
