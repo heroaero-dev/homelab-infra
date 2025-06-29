@@ -2,33 +2,4 @@
 .env
 */.env
 **/.env
-
-# Cache, logs, junk
-*.log
-tmp/
-__pycache__/
-.DS_Store
-
-# Vaultwarden
-docker/warden-stack/.vw-data/
-
-# Plex media and config
-docker/plex-stack/media/
-docker/plex-stack/config/
-
-# K3s sensitive or temporary files
-k3s/cloudflared-linux-amd64.deb
-*.key
-*.crt
-
-# Ignore K3s Plex config and tokens
-k3s/plex-stack/config/
-# Ignore all PVC data if stored locally
-**/config/
-**/data/
-**/media/
-**/Library/
-
-.env
-**/.env
-.env.gpg
+.age.agekey
