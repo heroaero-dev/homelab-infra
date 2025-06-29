@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: cloudflared
   namespace: cloudflared
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 2
   selector:
