@@ -74,4 +74,6 @@ data:
         service: http://homepage-svc.test-dev.svc.cluster.local
       - hostname: pgadmin.heroaero.dev
         service: http://pgadmin.test-dev.svc.cluster.local
+      - hostname: graf.heroaero.dev
+        service: http://prometheus-stack-grafana.monitoring.svc.cluster.local
       - service: http_status:404
