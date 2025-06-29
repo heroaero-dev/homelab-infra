@@ -69,7 +69,7 @@ data:
       - hostname: link.heroaero.dev 
         service: http://linkding:9090
       - hostname: heroaero.dev 
-        service: http://homepage-svc
+        service: http://homepage-svc.test-dev.svc.cluster.local
       - hostname: pgadmin.heroaero.dev
         service: http://pgadmin.test-dev.svc.cluster.local
       - service: http_status:404
