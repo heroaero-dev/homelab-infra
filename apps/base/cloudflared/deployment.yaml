@@ -70,6 +70,6 @@ data:
         service: http://linkding:9090
       - hostname: heroaero.dev 
         service: http://homepage-svc:80
-      - hostname: pgadmin.heroaero.dev 
+      - hostname: pgadmin.heroaero.dev:80 
         service: http://pgadmin
       - service: http_status:404
