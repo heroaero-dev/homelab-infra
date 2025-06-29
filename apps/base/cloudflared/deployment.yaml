@@ -71,5 +71,5 @@ data:
       - hostname: heroaero.dev 
         service: http://homepage-svc
       - hostname: pgadmin.heroaero.dev
-        service: http://pgadmin
+        service: http://pgadmin.test-dev.svc.cluster.local
       - service: http_status:404
