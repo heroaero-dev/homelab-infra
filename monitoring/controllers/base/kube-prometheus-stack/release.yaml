@@ -23,7 +23,7 @@ spec:
     mode: enabled
     ignore:
       # Ignore "validated" annotation which is interested during install
-      - path: ["/metadata/annotation/prometheus-operator-validated"]
+      - paths: ["/metadata/annotation/prometheus-operator-validated"]
         target:
           kind: PrometheusRule
   values:
