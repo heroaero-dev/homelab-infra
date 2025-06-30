@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: pgadmin
+  namespace: test-dev 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      env: pgadmin
+  template:
+    metadata:
+      labels:
+        env: pgadmin
+    spec:
+      securityContext:
+        fsGroup: 5050
+        runAsUser: 5050
+        runAsGroup: 5050
+      containers:
+        - name: pgadmin
+          image: dpage/pgadmin4:9.4 
+          securityContext:
+            allowPrivilegeEscalation: false
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: kube-secret 
+                  key: PGADMIN_DEFAULT_EMAIL
+            - name: PGADMIN_DEFAULT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kube-secret
+                  key: PGADMIN_DEFAULT_PASSWORD
