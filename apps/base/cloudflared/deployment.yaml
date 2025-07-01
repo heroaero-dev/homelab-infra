@@ -49,7 +49,7 @@ spec:
             periodSeconds: 10
           volumeMounts:
             - name: config
-              Mountpath: /etc/cloudflared/config
+              mountPath: /etc/cloudflared/config
               readOnly: true 
       volumes:
         - name: config
