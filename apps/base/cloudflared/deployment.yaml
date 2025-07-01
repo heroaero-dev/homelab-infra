@@ -24,8 +24,6 @@ spec:
         - name: cloudflared
           image: cloudflare/cloudflared:latest
           envFrom:
-            - configMapRef:
-                name: cloudflared-config
             - secretRef:
                 name: kube-secret 
           command:
@@ -37,8 +35,8 @@ spec:
             - debug
             - --metrics
             - 0.0.0.0:2000
-            # - --config 
-            # - /etc/cloudflared/config/config.yaml
+            - --config 
+            - /etc/cloudflared/config/config.yaml
             - run
           livenessProbe:
             httpGet: 
@@ -49,7 +47,14 @@ spec:
             failureThreshold: 1
             initialDelaySeconds: 10
             periodSeconds: 10
-
+          volumeMounts:
+            - name: config
+              Mountpath: /etc/cloudflared/config
+              readOnly: true 
+      volumes:
+        - name: config
+          configMap:
+            name: cloudflared-config
 --- 
 apiVersion: v1
 kind: ConfigMap 
