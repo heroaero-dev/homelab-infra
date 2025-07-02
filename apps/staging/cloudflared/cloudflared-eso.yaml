@@ -7,7 +7,7 @@ spec:
   refreshInterval: 1m 
   secretStoreRef:
     name: secret-store
-    kind: SecretStore 
+    kind: ClusterSecretStore 
   target:
     name: kube-secret 
     creationPolicy: Owner
