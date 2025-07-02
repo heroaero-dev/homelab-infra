@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pgadmin-data-volume 
-  namespace: test-dev 
+  namespace: pgadmin 
 spec:
   accessModes:
     - ReadWriteOnce
