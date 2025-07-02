@@ -22,14 +22,6 @@ spec:
           image: dpage/pgadmin4:9.4 
           securityContext:
             allowPrivilegeEscalation: false
-          env:
-            - name: PGADMIN_DEFAULT_EMAIL
-              valueFrom:
-                secretKeyRef:
-                  name: kube-secret 
-                  key: PGADMIN_DEFAULT_EMAIL
-            - name: PGADMIN_DEFAULT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: kube-secret
-                  key: PGADMIN_DEFAULT_PASSWORD
+          envFrom:
+            - secretRef:
+                name: pgadmin-secret 

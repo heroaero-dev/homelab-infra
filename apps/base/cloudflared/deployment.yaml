@@ -25,7 +25,7 @@ spec:
           image: cloudflare/cloudflared:latest
           envFrom:
             - secretRef:
-                name: kube-secret 
+                name: cloudflared-secret 
           command:
             # configures tunnel run paramaters
             - cloudflared
