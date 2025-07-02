@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment 
 metadata:
   name: pgadmin
-  namespace: test-dev 
+  namespace: pgadmin
 spec:
   replicas: 1
   selector:
