@@ -20,14 +20,14 @@ jobs:
         with:
           go-version: '1.22'
 
-
       - name: Install tools
         run: |
           go install github.com/mikefarah/yq/v4@v4.40.5
-              go install github.com/yannh/kubeconform/cmd/kubeconform@v0.6.4
-              go install go.mozilla.org/sops/v3/cmd/sops@v3.8.1
-              curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
-              echo "$PWD" >> $GITHUB_PATH
+          go install github.com/yannh/kubeconform/cmd/kubeconform@v0.6.4
+          go install github.com/getsops/sops/v3/cmd/sops@v3.8.1
+          curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
+          echo "$PWD" >> $GITHUB_PATH
+
       - name: Lint Kustomize bases
         run: |
           for dir in clusters/*; do
@@ -54,3 +54,4 @@ jobs:
             echo "🔐 Checking $f"
             sops -d "$f" > /dev/null
           done
+
