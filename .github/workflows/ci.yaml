@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    name: Validate Kustomize and Secrets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y yq
+          go install github.com/yannh/kubeconform/cmd/kubeconform@latest
+          go install github.com/fluxcd/kustomize-controller/cmd/kustomize@latest
+          go install go.mozilla.org/sops/v3/cmd/sops@latest
+
+      - name: Lint Kustomize bases
+        run: |
+          for dir in clusters/*; do
+            if [ -d "$dir" ]; then
+              echo "🔍 Linting $dir"
+              kustomize build "$dir" > /dev/null
+            fi
+          done
+
+      - name: Validate Kubernetes manifests
+        run: |
+          for dir in clusters/*; do
+            if [ -d "$dir" ]; then
+              echo "🔍 Validating manifests in $dir"
+              kustomize build "$dir" | kubeconform -strict -summary
+            fi
+          done
+
+      - name: Check SOPS decryption works
+        env:
+          SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+        run: |
+          for f in $(find secrets/ -name '*.sops.yaml'); do
+            echo "🔐 Checking $f"
+            sops -d "$f" > /dev/null
+          done
