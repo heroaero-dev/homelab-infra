@@ -30,20 +30,24 @@ jobs:
               echo "$PWD" >> $GITHUB_PATH
       - name: Lint Kustomize bases
         run: |
-          for dir in clusters/*; do
-            if [ -d "$dir" ]; then
-              echo "🔍 Linting $dir"
-              kustomize build "$dir" > /dev/null
-            fi
+          for group in apps infrastructure clusters; do
+            for dir in "$group"/*; do
+              if [ -d "$dir" ]; then
+                echo "🔍 Linting $dir"
+                kustomize build "$dir" > /dev/null
+              fi
+            done
           done
 
       - name: Validate Kubernetes manifests
         run: |
-          for dir in clusters/*; do
-            if [ -d "$dir" ]; then
-              echo "🔍 Validating manifests in $dir"
-              kustomize build "$dir" | kubeconform -strict -summary
-            fi
+          for group in apps infrastructure clusters; do
+            for dir in "$group"/*; do
+              if [ -d "$dir" ]; then
+                echo "🔍 Validating manifests in $dir"
+                kustomize build "$dir" | kubeconform -strict -summary
+              fi
+            done
           done
 
       - name: Check SOPS decryption works
