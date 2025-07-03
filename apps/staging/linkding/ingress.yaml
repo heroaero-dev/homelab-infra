@@ -12,6 +12,6 @@ spec:
               service:
                 name: linkding
                 port:
-                  number: 9000
+                  number: 9090
             path: /
             pathType: Prefix
