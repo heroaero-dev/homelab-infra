@@ -20,14 +20,14 @@ jobs:
         with:
           go-version: '1.22'
 
+
       - name: Install tools
         run: |
-          sudo apt-get update
-          sudo apt-get install -y yq
-          go install github.com/yannh/kubeconform/cmd/kubeconform@latest
-          go install github.com/fluxcd/kustomize-controller/cmd/kustomize@latest
-          go install go.mozilla.org/sops/v3/cmd/sops@latest
-
+          go install github.com/mikefarah/yq/v4@latest
+          go install github.com/yannh/kubeconform/cmd/kubeconform@v0.6.4
+          go install github.com/fluxcd/kustomize-controller/cmd/kustomize@v0.35.0
+          go install go.mozilla.org/sops/v3/cmd/sops@v3.8.1
+          echo "$HOME/go/bin" >> $GITHUB_PATH
       - name: Lint Kustomize bases
         run: |
           for dir in clusters/*; do
