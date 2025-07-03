@@ -65,7 +65,7 @@ data:
   config.yaml: |
     ingress:
       - hostname: link.heroaero.dev 
-        service: http://linkding.linkding.svc.cluster.local:9090
+        service: http://traefik.kube-system.svc.cluster:80
       - hostname: heroaero.dev 
         service: http://homepage-svc.test-dev.svc.cluster.local
       - hostname: pgadmin.heroaero.dev
