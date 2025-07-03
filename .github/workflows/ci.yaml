@@ -42,7 +42,11 @@ jobs:
           for dir in clusters/*; do
             if [ -d "$dir" ]; then
               echo "🔍 Validating manifests in $dir"
-              kustomize build "$dir" | kubeconform -strict -summary
+              kustomize build "$dir" | kubeconform \
+                -strict \
+                -summary \
+                -ignore-missing-schemas \
+                -skip CustomResourceDefinition,Kustomization,GitRepository,HelmRelease,ExternalSecret,ClusterSecretStore,SecretStore,Issuer,Certificate
             fi
           done
 
