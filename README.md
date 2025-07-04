@@ -26,3 +26,7 @@ I started with **Docker Swarm**, but after running into its limitations, I trans
 ## 🧾 Notes
 
 Everything here reflects real mistakes, learning, and iteration — this repo isn't polished for show, it's built for growth. 💪
+
+## 📝 License
+
+This project is licensed under the [MIT License](LICENSE).
