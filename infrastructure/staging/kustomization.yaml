@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
   - long-horn
   - cert-manager
+  - stakater-reloader
+  - cloudflared
