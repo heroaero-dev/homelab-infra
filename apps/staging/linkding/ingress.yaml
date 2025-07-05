@@ -2,6 +2,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: linkding
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    # Optional: force redirect https
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: traefik
   rules:
