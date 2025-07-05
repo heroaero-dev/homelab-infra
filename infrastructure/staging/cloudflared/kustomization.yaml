@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: cloudflared
 resources:
   - external-secret.yaml
-  - ../../base/cloudflared
+  # - ../../base/cloudflared
