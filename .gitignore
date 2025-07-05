@@ -3,3 +3,4 @@
 */.env
 **/.env
 .age.agekey
+.ci-kubeconfig
