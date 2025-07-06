@@ -6,3 +6,4 @@ resources:
   - stakater-reloader
   - cloudflared
   - ci-access
+  - external-secrets
