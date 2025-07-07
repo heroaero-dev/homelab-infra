@@ -33,10 +33,10 @@ spec:
         enabled: true
         ingressClassName: traefik
         hosts:
-          - graf.heroaero.com
+          - graf.heroaero.info
         ## Secret must be manually created in the namespace
         ##
         tls:
          - secretName: grafana-tls-secret
            hosts:
-           - graf.heroaero.com
+           - graf.heroaero.info
