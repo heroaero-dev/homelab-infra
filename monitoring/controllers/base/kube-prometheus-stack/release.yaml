@@ -36,7 +36,7 @@ spec:
           - graf.heroaero.com
         ## Secret must be manually created in the namespace
         ##
-        tls: []
-        # - secretName: grafana-general-tls
-        #   hosts:
-        #   - grafana.example.com
+        tls:
+         - secretName: grafana-tls-secret
+           hosts:
+           - graf.heroaero.com
