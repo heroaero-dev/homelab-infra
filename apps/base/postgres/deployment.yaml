@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postges
+    spec:
+      securityContext:
+        fsGroup: 999
+        runAsUser: 999
+        runAsGroup: 999
+      containers:
+        - image: postgres:14.18-bookworm
+          name: postgres
+          envFrom:
+            - secretRef: 
+                name: postgres
+          securityContext:
+            allowPrivilegeEscalation: false
+          resources: {}
+          ports:
+            - containerPort: 5432
