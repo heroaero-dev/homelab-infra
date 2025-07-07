@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: pgadmin.heroaero.dev
+    - host: pgadmin.heroaero.com
       http:
         paths:
           - backend:
