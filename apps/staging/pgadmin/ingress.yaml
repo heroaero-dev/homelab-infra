@@ -2,10 +2,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: pgadmin
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    # Optional: force redirect https
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: traefik
   rules:
-    - host: pgadmin.heroaero.net
+    - host: pgadmin.heroaero.dev
       http:
         paths:
           - backend:
@@ -15,3 +19,7 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
+  tls:
+    - hosts:
+        - pgadmin.heroaero.dev
+      secretName: pgadmin-tls
