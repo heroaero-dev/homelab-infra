@@ -5,4 +5,5 @@ resources:
   - infrastructure.yaml
   - secrets.yaml
   - monitoring.yaml
+  - games.yaml
   - flux-system/
