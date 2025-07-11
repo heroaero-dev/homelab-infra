@@ -59,12 +59,3 @@ spec:
         # Set this to false if you don't care to persist state between restarts.
         enabled: true
         existingClaim: minecraft-datadir
-
-    resources:
-      limits:
-        memory: "3Gi"
-        cpu: "1000m"
-      requests:
-        memory: "2Gi"
-        cpu: "500m"
-
