@@ -19,7 +19,7 @@ spec:
         runAsGroup: 5050
       containers:
         - name: pgadmin
-          image: dpage/pgadmin4:9.4 
+          image: dpage/pgadmin4:9.5 
           securityContext:
             allowPrivilegeEscalation: false
           envFrom:
