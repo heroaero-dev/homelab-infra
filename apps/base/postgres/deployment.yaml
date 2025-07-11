@@ -17,7 +17,7 @@ spec:
         runAsUser: 999
         runAsGroup: 999
       containers:
-        - image: postgres:14.18-bookworm
+        - image: postgres:17.5-bookworm
           name: postgres
           envFrom:
             - secretRef: 
