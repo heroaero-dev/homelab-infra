@@ -1,5 +1,20 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "enabledManagers": ["flux", "kubernetes", "helm-values"],
+  "flux": {
+    "fileMatch": ["\\.ya?ml$"]
+  },
   "kubernetes": {
-    "managerFilePatterns": ["/\\.yaml$/"]
-  }
+    "fileMatch": ["\\.ya?ml$"]
+  },
+  "helm-values": {
+    "fileMatch": ["values\\.ya?ml$"]
+  },
+  "packageRules": [
+    {
+      "matchDatasources": ["docker", "helm"],
+      "enabled": true
+    }
+  ]
 }
+
