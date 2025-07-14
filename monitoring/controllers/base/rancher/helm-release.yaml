@@ -24,10 +24,10 @@ spec:
       path: "/"
       servicePort: 80
 
-      extraAnnotations:
-        cert-manager.io/cluster-issuer: letsencrypt-prod
-        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        #extraAnnotations:
+        #cert-manager.io/cluster-issuer: letsencrypt-prod
+        #nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 
       tls:
-        source: secret
+        source: letsEncrypt
         secretName: tls-rancher-ingress
