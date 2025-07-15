@@ -1,0 +1,62 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: minecraft
+  namespace: minecraft
+spec:
+  chart:
+    spec:
+      chart: minecraft
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: minecraft
+        namespace: flux-system
+      version: v4.26.3
+  interval: 1m0s
+  values:
+    minecraftServer:
+      type: "FORGE"
+      version: "1.21.7"
+      forgeVersion: "57.0.2"
+      forgeInstallerUrl: "https://maven.minecraftforge.net/net/minecraftforge/forge/1.21.7-57.0.2/forge-1.21.7-57.0.2-installer.jar"
+      modUrls: 
+        - "https://mediafilez.forgecdn.net/files/6713/532/balm-forge-1.21.7-21.7.2-all.jar"
+        - "https://mediafilez.forgecdn.net/files/6715/415/waystones-forge-1.21.7-21.7.1.jar"
+        - "https://mediafilez.forgecdn.net/files/6736/217/Xaeros_Minimap_25.2.10_NeoForge_1.21.7.jar"
+        - "https://mediafilez.forgecdn.net/files/6725/495/mcw-bridges-3.1.1-mc1.21.7forge.jar"
+        - "https://mediafilez.forgecdn.net/files/6713/751/collective-1.21.7-8.4.jar"
+        - "https://mediafilez.forgecdn.net/files/6697/757/darkquesting-forge-1.21.6-1.3.3.jar"
+        - "https://mediafilez.forgecdn.net/files/6742/883/GlitchCore-forge-1.21.7-21.7.0.0.jar"
+        - "https://mediafilez.forgecdn.net/files/6747/966/BiomesOPlenty-forge-1.21.7-21.7.0.1.jar"
+        - "https://mediafilez.forgecdn.net/files/6727/710/TerraBlender-forge-1.21.7-6.0.0.2.jar"
+      gameMode: creative
+      memory: 2G
+      ops: "Heroaero666"
+      motd: "Welcome to Minecraft on Kubernetes!"
+      eula: "TRUE"
+      serviceType: LoadBalancer
+      servicePort: 25565
+      loadBalancerIP: 10.6.6.116
+      ## Set the externalTrafficPolicy in the Service to either Cluster or Local
+      externalTrafficPolicy: Local
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 3000
+      runAsNonRoot: true
+      fsGroup: 2000
+      seccompProfile:
+        type: RuntimeDefault
+
+    securityContext:
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      allowPrivilegeEscalation: false
+persistence:
+  dataDir:
+    enabled: true
+    Size: 1Gi
+    accessModes:
+      - ReadWriteOnce
