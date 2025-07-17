@@ -13,7 +13,7 @@ spec:
         name: minecraft
         namespace: flux-system
       version: v4.26.3
-  interval: 1m0s
+  interval: 2m0s
   values:
     minecraftServer:
       type: "FORGE"

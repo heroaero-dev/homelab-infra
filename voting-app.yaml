@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: voting-app
+  name: voting-app
+spec:
+  containers:
+  - image: dockersample/examplevotingapp
+    name: voting-app
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
