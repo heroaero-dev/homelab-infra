@@ -17,3 +17,5 @@ spec:
       containers:
       - image: vaultwarden/server:latest
         name: server
+        ports:
+          - containerPort: 80
