@@ -68,7 +68,7 @@ data:
       - hostname: heroaero.dev 
         service: http://homepage-svc.test-dev.svc.cluster.local
       - hostname: ranch.heroaero.net
-        service: http://traefik.kube-system.svc.cluster.local:80
+        service: http://traefik.kube-system.svc.cluster.local:443
       - hostname: pgadmin.heroaero.net
         service: http://traefik.kube-system.svc.cluster.local:80
       - hostname: graf.heroaero.info
