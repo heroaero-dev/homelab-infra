@@ -13,14 +13,13 @@ I started with **Docker Swarm**, but after running into its limitations, I trans
 
 - Deploy and manage my own containers and pods using **official documentation** only
 - Avoid using tutorials to build self-reliance and deepen understanding
-- Ask ChatGPT **only when completely stuck**, and always **fact-check AI suggestions** before applying them
 - Maintain all stack configurations, manifests, and infra as code in this repository
 
 ## 📦 Current Setup
 
 - **K3s**: Lightweight Kubernetes for managing multi-node infrastructure
 - **Thinkpad E14**: My mobile workstation for testing, live debugging, and on-the-go infrastructure adjustments.
-- **Vaultwarden, Plex, Adminer, and more**: Deployed as part of my stacks
+- **Cloudflared, External-secrets, Cert-manager, and more**: Deployed as part of my stacks
 - **Tailscale + Cloudflare Tunnel**: For secure remote access
 
 ## 🧾 Notes
